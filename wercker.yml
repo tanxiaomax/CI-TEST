@@ -42,6 +42,6 @@ deploy:
         cmd: /pipeline/source/gogo-service
         port: "8080"
         tag: latest
-        repository: tanxiaomax/ci-test
+        repository: tnaxiaomax/ci-test
         registry: https://registry.hub.docker.com 
     
