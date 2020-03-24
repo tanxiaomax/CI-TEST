@@ -1,6 +1,0 @@
-box: golang
-
-dev:
-  steps:
-   - internal/shell:
-       cmd: /bin/sh       
