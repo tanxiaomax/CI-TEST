@@ -1,0 +1,8 @@
+box: golang
+
+dev:
+  steps:
+   - setup-go-workspace:
+       package-dir: github.com/test/test
+   - internal/shell:
+       cmd: /bin/sh       
