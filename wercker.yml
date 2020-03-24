@@ -5,4 +5,43 @@ dev:
    - setup-go-workspace:
        package-dir: github.com/test/test
    - internal/shell:
-       cmd: /bin/sh       
+       cmd: /bin/sh      
+
+build:
+  steps:
+   - setup-go-workspace:
+        package-dir: github.com/tanxiaomax/CI-Test
+       
+   - script:
+        name: env
+        code: env 
+   - script:
+        name: go-get
+        code: |
+
+         cd $WERCKER_SOURCE_DIR
+         go version
+         go get -u github.com/Mastermins/glide
+         export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
+         glide install
+
+   - script:
+        name: go build
+        code: |
+         go build
+
+   - script:
+        name: copy file to wercker output
+        code: |
+         cp -R ./ ${WERCKER_OUTPUT_DIR}
+deploy:
+  steps:
+    - internal/docker-push:
+        username: $USERNAME
+        password: $PASSWORD
+        cmd: /pipeline/source/gogo-service
+        port: "8080"
+        tag: latest
+        repository: tanxiaomax/ci-test
+        registry: https://registry.hub.docker.com 
+    
